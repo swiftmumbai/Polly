@@ -1,4 +1,10 @@
-# Feature Request
+---
+name: Feature Request
+about: Suggest a new feature for the iOS app
+title: '[Feature Request] '
+labels: enhancement, needs-review
+assignees: ''
+---
 
 ## Summary
 <!-- Provide a brief summary of the feature you'd like to see added -->
