@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24C101" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Poll" representedClassName="Poll" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="expiryDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="info" optional="YES" attributeType="String"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isMultipleChoice" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="options" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PollOption" inverseName="poll" inverseEntity="PollOption"/>
+        <relationship name="voters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Profile" inverseName="pollsParticipated" inverseEntity="Profile"/>
+        <relationship name="votes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vote" inverseName="poll" inverseEntity="Vote"/>
+    </entity>
+    <entity name="PollOption" representedClassName="PollOption" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="poll" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Poll" inverseName="options" inverseEntity="Poll"/>
+        <relationship name="vote" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vote" inverseName="option" inverseEntity="Vote"/>
+    </entity>
+    <entity name="Profile" representedClassName="Profile" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="joinedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="pollsParticipated" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Poll" inverseName="voters" inverseEntity="Poll"/>
+        <relationship name="votes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vote" inverseName="voter" inverseEntity="Vote"/>
+    </entity>
+    <entity name="Vote" representedClassName="Vote" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="votedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="option" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PollOption" inverseName="vote" inverseEntity="PollOption"/>
+        <relationship name="poll" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Poll" inverseName="votes" inverseEntity="Poll"/>
+        <relationship name="voter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profile" inverseName="votes" inverseEntity="Profile"/>
+    </entity>
+</model>
