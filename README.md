@@ -67,6 +67,10 @@ The [Inject](https://github.com/krzysztofzablocki/Inject?tab=readme-ov-file#inte
 
 Refer this [page](https://github.com/krzysztofzablocki/Inject?tab=readme-ov-file#integration) to use Inject
 
+## Contributing
+
+Refer the [CONTRIBUTING.md](https://github.com/swiftmumbai/Polly/blob/main/CONTRIBUTING.md) to know more.
+
 ## About Swift Mumbai
 
 Swift Mumbai is an independent community of users focused on Apple's Swift programming language, based in Mumbai, India. They organize events and meetups aimed at bringing together developers to share knowledge, collaborate, and foster a supportive environment for learning and growth in Swift development.
