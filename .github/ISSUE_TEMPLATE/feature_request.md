@@ -25,8 +25,7 @@ So that [benefit]
 <!-- If applicable, provide technical implementation details -->
 - [ ] UI/UX Changes Required
 - [ ] Data Model Changes Required
-- [ ] New API Endpoints Needed
-- [ ] CoreData Schema Updates
+- [ ] CoreData CRUD Operations
 
 ## Alternatives Considered
 <!-- What alternatives have you considered? -->
@@ -37,13 +36,9 @@ So that [benefit]
 ## iOS/Swift Requirements
 <!-- Specify if this requires specific iOS/Swift versions -->
 - Minimum iOS Version:
-- Swift Version:
-- SwiftUI Version:
 
 ## Implementation Checklist
 - [ ] Feature Design
-- [ ] UI/UX Design
+- [ ] UI/UX Design Use Native Components
 - [ ] Implementation
-- [ ] Unit Tests
-- [ ] Documentation
 - [ ] SwiftLint Compliance
