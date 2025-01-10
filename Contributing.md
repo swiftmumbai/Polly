@@ -12,13 +12,14 @@ If you find a bug, please report it by opening an issue on our [GitHub Issues](h
 
 We are always looking to improve Polly. If you have a feature request, please open an issue on our [GitHub Issues](https://github.com/swiftmumbai/Polly/issues) page and describe the feature you would like to see.
 
-### Code Contributions
+### Code Contributions 
 
-1. **Fork the Repository**: Fork the repository to your own GitHub account and then clone it to your local machine.
+# Setup
 
+1. **Clone the repository**:
     ```sh
     git clone https://github.com/swiftmumbai/Polly.git
-    cd polly
+    cd Polly
     ```
 
 2. **Create a Branch**: Create a new branch for your feature or bugfix.

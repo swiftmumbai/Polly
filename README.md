@@ -17,9 +17,9 @@ Polly is an iOS application for creating and participating in polls. This projec
 
 ## Setup
 
-1. Fork and then clone the repository:
+1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/Polly.git
+    git clone https://github.com/swiftmumbai/Polly.git
     cd polly
     ```
 
@@ -28,7 +28,7 @@ Polly is an iOS application for creating and participating in polls. This projec
     open Polly.xcodeproj
     ```
 
-3. Select the [Polly](http://_vscodecontentref_/1) target and choose your preferred simulator or device.
+3. Select the Polly target and choose your preferred simulator or device.
 
 4. Build and run the project:
     ```sh
