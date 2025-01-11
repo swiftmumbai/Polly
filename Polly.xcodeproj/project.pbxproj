@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,11 +15,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		CF12879F2D2ECD0E007AB2FB /* Polly */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Polly;
-			sourceTree = "<group>";
-		};
+		CF12879F2D2ECD0E007AB2FB /* Polly */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Polly; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +89,7 @@
 				};
 			};
 			buildConfigurationList = CF1287982D2ECD0E007AB2FB /* Build configuration list for PBXProject "Polly" */;
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -104,7 +101,6 @@
 			packageReferences = (
 				CF6A74602D2EEB8300E3D5CB /* XCRemoteSwiftPackageReference "Inject" */,
 			);
-			preferredProjectObjectVersion = 77;
 			productRefGroup = CF12879E2D2ECD0E007AB2FB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
