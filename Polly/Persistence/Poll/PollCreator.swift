@@ -31,7 +31,7 @@ public struct PollCreator {
         do {
             try context.save()
         } catch {
-            print("Error saving poll: \(error)")
+            Log.error(error)
         }
         return poll
     }
@@ -73,7 +73,7 @@ public struct PollCreator {
                 try context.save()
             }
         } catch {
-            print("Error updating poll: \(error)")
+            Log.error(error)
         }
     }
 
@@ -85,7 +85,7 @@ public struct PollCreator {
         do {
             try context.save()
         } catch {
-            print("Error deleting poll: \(error)")
+            Log.error(error)
         }
     }
 }

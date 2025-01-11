@@ -23,7 +23,7 @@ public struct ProfileCreator {
         do {
             try context.save()
         } catch {
-            print("Error saving profile: \(error)")
+            Log.error(error)
         }
         return profile
     }
@@ -45,7 +45,7 @@ public struct ProfileCreator {
                 try context.save()
             }
         } catch {
-            print("Error updating profile: \(error)")
+            Log.error(error)
         }
     }
 
@@ -57,7 +57,7 @@ public struct ProfileCreator {
         do {
             try context.save()
         } catch {
-            print("Error deleting profile: \(error)")
+            Log.error(error)
         }
     }
 }
