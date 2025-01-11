@@ -53,13 +53,13 @@ public enum SampleData {
         ]
         
         // Create some votes
-        VoteCreator.create(option: poll1Options[0], poll: poll1, voter: profile1, in: context)
-        VoteCreator.create(option: poll1Options[1], poll: poll1, voter: profile2, in: context)
-        VoteCreator.create(option: poll1Options[0], poll: poll1, voter: profile3, in: context)
+        VoteCreator.create(option: poll1Options[0], voter: profile1, in: context)
+        VoteCreator.create(option: poll1Options[1], voter: profile2, in: context)
+        VoteCreator.create(option: poll1Options[0], voter: profile3, in: context)
         
-        VoteCreator.create(option: poll2Options[0], poll: poll2, voter: profile1, in: context)
-        VoteCreator.create(option: poll2Options[1], poll: poll2, voter: profile2, in: context)
-        VoteCreator.create(option: poll2Options[2], poll: poll2, voter: profile2, in: context)
+        VoteCreator.create(option: poll2Options[0], voter: profile1, in: context)
+        VoteCreator.create(option: poll2Options[1], voter: profile2, in: context)
+        VoteCreator.create(option: poll2Options[2], voter: profile2, in: context)
         
         return (
             profiles: [profile1, profile2, profile3],
@@ -85,7 +85,7 @@ public enum SampleData {
         let option1 = PollOptionCreator.create(text: "Option 1", poll: poll, in: previewContext)
         
         let voter = previewProfile
-        VoteCreator.create(option: option1, poll: poll, voter: voter, in: previewContext)
+        VoteCreator.create(option: option1, voter: voter, in: previewContext)
         
         try? previewContext.save()
         return poll

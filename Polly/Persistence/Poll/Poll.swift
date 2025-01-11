@@ -27,26 +27,7 @@ extension Poll {
     @NSManaged public var expiryDate: Date?
     @NSManaged public var createdAt: Date?
     @NSManaged public var isActive: Bool
-    @NSManaged public var votes: NSSet?
     @NSManaged public var options: NSSet?
-    @NSManaged public var voters: NSSet?
-
-}
-
-// MARK: Generated accessors for votes
-extension Poll {
-
-    @objc(addVotesObject:)
-    @NSManaged public func addToVotes(_ value: Vote)
-
-    @objc(removeVotesObject:)
-    @NSManaged public func removeFromVotes(_ value: Vote)
-
-    @objc(addVotes:)
-    @NSManaged public func addToVotes(_ values: NSSet)
-
-    @objc(removeVotes:)
-    @NSManaged public func removeFromVotes(_ values: NSSet)
 
 }
 
@@ -64,23 +45,6 @@ extension Poll {
 
     @objc(removeOptions:)
     @NSManaged public func removeFromOptions(_ values: NSSet)
-
-}
-
-// MARK: Generated accessors for voters
-extension Poll {
-
-    @objc(addVotersObject:)
-    @NSManaged public func addToVoters(_ value: Profile)
-
-    @objc(removeVotersObject:)
-    @NSManaged public func removeFromVoters(_ value: Profile)
-
-    @objc(addVoters:)
-    @NSManaged public func addToVoters(_ values: NSSet)
-
-    @objc(removeVoters:)
-    @NSManaged public func removeFromVoters(_ values: NSSet)
 
 }
 

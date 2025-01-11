@@ -23,10 +23,15 @@ public struct PollOptionCreator {
         option.image = image
         option.poll = poll
 
+        // Update poll's options relationship
+        var pollOptions: [PollOption] = poll.options?.toArray() ?? []
+        pollOptions.append(option)
+        poll.options = NSSet(array: pollOptions)
+
         do {
             try context.save()
         } catch {
-            print("Error saving poll option: \(error)")
+            Log.error(error)
         }
         return option
     }
@@ -53,7 +58,7 @@ public struct PollOptionCreator {
                 try context.save()
             }
         } catch {
-            print("Error updating poll option: \(error)")
+            Log.error(error)
         }
     }
 
@@ -61,11 +66,24 @@ public struct PollOptionCreator {
         option: PollOption,
         in context: NSManagedObjectContext = PersistenceController.shared.viewContext
     ) {
+        // Clean up relationships
+        if let poll = option.poll {
+            var pollOptions: [PollOption] = poll.options?.toArray() ?? []
+            pollOptions.removeAll { $0 == option }
+            poll.options = NSSet(array: pollOptions)
+        }
+
+        // Delete associated votes
+        if let votes = option.votes {
+            let voteArray = votes.toArray() as [Vote]
+            voteArray.forEach { context.delete($0) }
+        }
+
         context.delete(option)
         do {
             try context.save()
         } catch {
-            print("Error deleting poll option: \(error)")
+            Log.error(error)
         }
     }
 }

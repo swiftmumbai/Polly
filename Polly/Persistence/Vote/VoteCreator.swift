@@ -13,42 +13,28 @@ public struct VoteCreator {
     @discardableResult
     static public func create(
         option: PollOption,
-        poll: Poll,
         voter: Profile,
         in context: NSManagedObjectContext = PersistenceController.shared.viewContext
     ) -> Vote {
         let vote = Vote(context: context)
         vote.id = UUID()
         vote.votedAt = Date.now
-        vote.option = option
-        vote.poll = poll
-        vote.voter = voter
+        vote.options = option
+        vote.profile = voter
 
-        // Update relationships using arrays
-        var votes: [Vote] = poll.votes.toArray()
-        votes.append(vote)
-        poll.votes = NSSet(array: votes)
-
-        var voters: [Profile] = poll.voters.toArray()
-        voters.append(voter)
-        poll.voters = NSSet(array: voters)
-
-        var optionVotes: [Vote] = option.vote.toArray()
+        // Update relationships
+        var optionVotes: [Vote] = option.votes?.toArray() ?? []
         optionVotes.append(vote)
-        option.vote = NSSet(array: optionVotes)
+        option.votes = NSSet(array: optionVotes)
 
-        var voterVotes: [Vote] = voter.votes.toArray()
+        var voterVotes: [Vote] = voter.votes?.toArray() ?? []
         voterVotes.append(vote)
         voter.votes = NSSet(array: voterVotes)
-
-        var pollsParticipated: [Poll] = voter.pollsParticipated.toArray()
-        pollsParticipated.append(poll)
-        voter.pollsParticipated = NSSet(array: pollsParticipated)
 
         do {
             try context.save()
         } catch {
-            print("Error saving vote: \(error)")
+            Log.error(error)
         }
         return vote
     }
@@ -57,36 +43,24 @@ public struct VoteCreator {
         vote: Vote,
         in context: NSManagedObjectContext = PersistenceController.shared.viewContext
     ) {
-        // Clean up relationships using arrays
-        if let poll = vote.poll, let voter = vote.voter {
-            var votes: [Vote] = poll.votes.toArray()
-            votes.removeAll { $0 == vote }
-            poll.votes = NSSet(array: votes)
-
-            var voters: [Profile] = poll.voters.toArray()
-            voters.removeAll { $0 == voter }
-            poll.voters = NSSet(array: voters)
-
-            var voterVotes: [Vote] = voter.votes.toArray()
-            voterVotes.removeAll { $0 == vote }
-            voter.votes = NSSet(array: voterVotes)
-
-            var pollsParticipated: [Poll] = voter.pollsParticipated.toArray()
-            pollsParticipated.removeAll { $0 == poll }
-            voter.pollsParticipated = NSSet(array: pollsParticipated)
+        // Clean up relationships
+        if let option = vote.options {
+            var optionVotes: [Vote] = option.votes?.toArray() ?? []
+            optionVotes.removeAll { $0 == vote }
+            option.votes = NSSet(array: optionVotes)
         }
 
-        if let option = vote.option {
-            var optionVotes: [Vote] = option.vote.toArray()
-            optionVotes.removeAll { $0 == vote }
-            option.vote = NSSet(array: optionVotes)
+        if let profile = vote.profile {
+            var profileVotes: [Vote] = profile.votes?.toArray() ?? []
+            profileVotes.removeAll { $0 == vote }
+            profile.votes = NSSet(array: profileVotes)
         }
 
         context.delete(vote)
         do {
             try context.save()
         } catch {
-            print("Error deleting vote: \(error)")
+            Log.error(error)
         }
     }
 }

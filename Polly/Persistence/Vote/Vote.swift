@@ -22,9 +22,8 @@ extension Vote {
 
     @NSManaged public var id: UUID?
     @NSManaged public var votedAt: Date?
-    @NSManaged public var option: PollOption?
-    @NSManaged public var poll: Poll?
-    @NSManaged public var voter: Profile?
+    @NSManaged public var options: PollOption?
+    @NSManaged public var profile: Profile?
 
 }
 

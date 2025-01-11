@@ -23,25 +23,7 @@ extension Profile {
     @NSManaged public var id: UUID?
     @NSManaged public var name: String?
     @NSManaged public var joinedDate: Date?
-    @NSManaged public var pollsParticipated: NSSet?
     @NSManaged public var votes: NSSet?
-
-}
-
-// MARK: Generated accessors for pollsParticipated
-extension Profile {
-
-    @objc(addPollsParticipatedObject:)
-    @NSManaged public func addToPollsParticipated(_ value: Poll)
-
-    @objc(removePollsParticipatedObject:)
-    @NSManaged public func removeFromPollsParticipated(_ value: Poll)
-
-    @objc(addPollsParticipated:)
-    @NSManaged public func addToPollsParticipated(_ values: NSSet)
-
-    @objc(removePollsParticipated:)
-    @NSManaged public func removeFromPollsParticipated(_ values: NSSet)
 
 }
 

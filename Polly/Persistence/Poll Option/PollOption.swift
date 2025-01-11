@@ -23,25 +23,25 @@ extension PollOption {
     @NSManaged public var id: UUID?
     @NSManaged public var text: String?
     @NSManaged public var image: Data?
-    @NSManaged public var vote: NSSet?
     @NSManaged public var poll: Poll?
+    @NSManaged public var votes: NSSet?
 
 }
 
-// MARK: Generated accessors for vote
+// MARK: Generated accessors for votes
 extension PollOption {
 
-    @objc(addVoteObject:)
-    @NSManaged public func addToVote(_ value: Vote)
+    @objc(addVotesObject:)
+    @NSManaged public func addToVotes(_ value: Vote)
 
-    @objc(removeVoteObject:)
-    @NSManaged public func removeFromVote(_ value: Vote)
+    @objc(removeVotesObject:)
+    @NSManaged public func removeFromVotes(_ value: Vote)
 
-    @objc(addVote:)
-    @NSManaged public func addToVote(_ values: NSSet)
+    @objc(addVotes:)
+    @NSManaged public func addToVotes(_ values: NSSet)
 
-    @objc(removeVote:)
-    @NSManaged public func removeFromVote(_ values: NSSet)
+    @objc(removeVotes:)
+    @NSManaged public func removeFromVotes(_ values: NSSet)
 
 }
 
