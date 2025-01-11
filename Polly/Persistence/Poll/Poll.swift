@@ -27,12 +27,30 @@ extension Poll {
     @NSManaged public var expiryDate: Date?
     @NSManaged public var createdAt: Date?
     @NSManaged public var isActive: Bool
-    @NSManaged public var options: NSSet?
+    @NSManaged public var options: NSOrderedSet?
 
 }
 
 // MARK: Generated accessors for options
 extension Poll {
+
+    @objc(insertObject:inOptionsAtIndex:)
+    @NSManaged public func insertIntoOptions(_ value: PollOption, at idx: Int)
+
+    @objc(removeObjectFromOptionsAtIndex:)
+    @NSManaged public func removeFromOptions(at idx: Int)
+
+    @objc(insertOptions:atIndexes:)
+    @NSManaged public func insertIntoOptions(_ values: [PollOption], at indexes: NSIndexSet)
+
+    @objc(removeOptionsAtIndexes:)
+    @NSManaged public func removeFromOptions(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInOptionsAtIndex:withObject:)
+    @NSManaged public func replaceOptions(at idx: Int, with value: PollOption)
+
+    @objc(replaceOptionsAtIndexes:withOptions:)
+    @NSManaged public func replaceOptions(at indexes: NSIndexSet, with values: [PollOption])
 
     @objc(addOptionsObject:)
     @NSManaged public func addToOptions(_ value: PollOption)
@@ -41,10 +59,10 @@ extension Poll {
     @NSManaged public func removeFromOptions(_ value: PollOption)
 
     @objc(addOptions:)
-    @NSManaged public func addToOptions(_ values: NSSet)
+    @NSManaged public func addToOptions(_ values: NSOrderedSet)
 
     @objc(removeOptions:)
-    @NSManaged public func removeFromOptions(_ values: NSSet)
+    @NSManaged public func removeFromOptions(_ values: NSOrderedSet)
 
 }
 

@@ -24,9 +24,9 @@ public struct PollOptionCreator {
         option.poll = poll
 
         // Update poll's options relationship
-        var pollOptions: [PollOption] = poll.options?.toArray() ?? []
-        pollOptions.append(option)
-        poll.options = NSSet(array: pollOptions)
+        let pollOptions = poll.options?.mutableCopy() as? NSMutableOrderedSet ?? NSMutableOrderedSet()
+        pollOptions.add(option)
+        poll.options = pollOptions
 
         do {
             try context.save()
@@ -68,14 +68,14 @@ public struct PollOptionCreator {
     ) {
         // Clean up relationships
         if let poll = option.poll {
-            var pollOptions: [PollOption] = poll.options?.toArray() ?? []
-            pollOptions.removeAll { $0 == option }
-            poll.options = NSSet(array: pollOptions)
+            let pollOptions = poll.options?.mutableCopy() as? NSMutableOrderedSet ?? NSMutableOrderedSet()
+            pollOptions.remove(option)
+            poll.options = pollOptions
         }
 
         // Delete associated votes
         if let votes = option.votes {
-            let voteArray = votes.toArray() as [Vote]
+            let voteArray: [Vote] = votes.toArray()
             voteArray.forEach { context.delete($0) }
         }
 

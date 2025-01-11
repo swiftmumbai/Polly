@@ -23,13 +23,13 @@ public struct VoteCreator {
         vote.profile = voter
 
         // Update relationships
-        var optionVotes: [Vote] = option.votes?.toArray() ?? []
-        optionVotes.append(vote)
-        option.votes = NSSet(array: optionVotes)
+        var optionVotes = option.votes?.mutableCopy() as? NSMutableOrderedSet ?? NSMutableOrderedSet()
+        optionVotes.add(vote)
+        option.votes = optionVotes
 
-        var voterVotes: [Vote] = voter.votes?.toArray() ?? []
-        voterVotes.append(vote)
-        voter.votes = NSSet(array: voterVotes)
+        var voterVotes = voter.votes?.mutableCopy() as? NSMutableOrderedSet ?? NSMutableOrderedSet()
+        voterVotes.add(vote)
+        voter.votes = voterVotes
 
         do {
             try context.save()
@@ -45,15 +45,15 @@ public struct VoteCreator {
     ) {
         // Clean up relationships
         if let option = vote.options {
-            var optionVotes: [Vote] = option.votes?.toArray() ?? []
-            optionVotes.removeAll { $0 == vote }
-            option.votes = NSSet(array: optionVotes)
+            let optionVotes = option.votes?.mutableCopy() as? NSMutableOrderedSet ?? NSMutableOrderedSet()
+            optionVotes.remove(vote)
+            option.votes = optionVotes
         }
 
         if let profile = vote.profile {
-            var profileVotes: [Vote] = profile.votes?.toArray() ?? []
-            profileVotes.removeAll { $0 == vote }
-            profile.votes = NSSet(array: profileVotes)
+            let profileVotes = profile.votes?.mutableCopy() as? NSMutableOrderedSet ?? NSMutableOrderedSet()
+            profileVotes.remove(vote)
+            profile.votes = profileVotes
         }
 
         context.delete(vote)

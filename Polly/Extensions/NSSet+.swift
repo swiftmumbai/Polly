@@ -10,4 +10,4 @@ extension Optional where Wrapped == NSSet {
     func toArray<T>() -> [T] {
         return self?.allObjects as? [T] ?? []
     }
-} 
+}

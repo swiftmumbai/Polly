@@ -8,7 +8,7 @@
         <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isMultipleChoice" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="options" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PollOption" inverseName="poll" inverseEntity="PollOption"/>
+        <relationship name="options" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PollOption" inverseName="poll" inverseEntity="PollOption"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
@@ -20,7 +20,7 @@
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <relationship name="poll" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Poll" inverseName="options" inverseEntity="Poll"/>
-        <relationship name="votes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vote" inverseName="options" inverseEntity="Vote"/>
+        <relationship name="votes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Vote" inverseName="options" inverseEntity="Vote"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
@@ -31,7 +31,7 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="joinedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="votes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vote" inverseName="profile" inverseEntity="Vote"/>
+        <relationship name="votes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Vote" inverseName="profile" inverseEntity="Vote"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
