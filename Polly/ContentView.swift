@@ -8,18 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-
-    @ObserveInjection private var inject
-
+    
+    @Environment(\.managedObjectContext) var context
+    
     var body: some View {
-        VStack {
-            Image(systemName: "heart.fill")
-                .font(.largeTitle.bold())
-                .foregroundStyle(.pink)
-            Text("Hello, world!")
+        NavigationStack {
+            HomeView(viewModel: PollVM(context: context))
+                .enableInjection()
         }
-        .padding()
-        .enableInjection()
     }
 }
 
