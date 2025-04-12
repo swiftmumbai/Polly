@@ -19,6 +19,7 @@ struct PollCreationView: View {
                 HeaderView(title: $title,
                            description: $description)
                 Text("Add Options:")
+                    .fontWeight(.semibold)
                 AddOptionView(titleText: "") { title in
                     options.append(title)
                 }
@@ -30,6 +31,7 @@ struct PollCreationView: View {
         .toolbar {
             Button {} label: {
                 Text("Done")
+                    .fontWeight(.bold)
             }
         }
     }
@@ -53,6 +55,7 @@ private struct OptionListView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Existing Option:")
+                .fontWeight(.semibold)
                 .padding(.vertical)
             ForEach($options, id: \.self) { option in
                 ShowEditOptionView(options: $options,
@@ -68,9 +71,11 @@ private struct HeaderView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Title")
+                .fontWeight(.semibold)
             TextField("Enter poll title", text: $title)
                 .modifier(TextModifier())
             Text("Description")
+                .fontWeight(.semibold)
             TextField("Enter poll description", text: $description)
                 .modifier(TextModifier())
         }
@@ -142,11 +147,13 @@ private struct EditOptionView: View {
         }
         label: {
             Image(systemName: "pencil")
+                .tint(.green)
         }
         Button {
             action(.delete)
         } label: {
             Image(systemName: "x.circle")
+                .tint(.red)
         }
     }
 }
