@@ -18,7 +18,8 @@ struct PollCreationView: View {
             VStack(alignment: .leading) {
                 HeaderView(title: $title,
                            description: $description)
-                AddOptionView { title in
+                Text("Add Options:")
+                AddOptionView(titleText: "") { title in
                     options.append(title)
                 }
                 OptionListView(options: $options)
@@ -34,7 +35,9 @@ struct PollCreationView: View {
     }
 }
 
-private struct TextFieldModifier: ViewModifier {
+// MARK: Modifier
+
+private struct TextModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(8)
@@ -43,15 +46,75 @@ private struct TextFieldModifier: ViewModifier {
     }
 }
 
+// MARK: Views
+
+private struct OptionListView: View {
+    @Binding var options: [String]
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Existing Option:")
+                .padding(.vertical)
+            ForEach($options, id: \.self) { option in
+                ShowEditOptionView(options: $options,
+                               option: option)
+            }
+        }
+    }
+}
+
+private struct HeaderView: View {
+    @Binding var title: String
+    @Binding var description: String
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Title")
+            TextField("Enter poll title", text: $title)
+                .modifier(TextModifier())
+            Text("Description")
+            TextField("Enter poll description", text: $description)
+                .modifier(TextModifier())
+        }
+    }
+}
+
+private struct ShowEditOptionView: View {
+    @Binding var options: [String]
+    @Binding var option: String
+    @State var isEditing = false
+    var body: some View {
+        HStack {
+            if isEditing {
+                AddOptionView(titleText: option) { title in
+                    if let index = options.firstIndex(of: option) {
+                        options[index] = title
+                        isEditing.toggle()
+                    }
+                }
+            } else {
+                EditOptionView(titleText: option) { editState in
+                    switch editState {
+                    case .edit:
+                        isEditing.toggle()
+                    case .delete:
+                        if let index = options.firstIndex(of: option) {
+                            options.remove(at: index)
+                        }
+                    }
+                }
+            }
+        }
+        .modifier(TextModifier())
+    }
+}
+
 private struct AddOptionView: View {
-    @State var titleText: String = ""
+    @State var titleText: String
     var addText: (String) -> Void
     
     var body: some View {
-        Text("Add Options:")
         HStack {
             TextField("Option Title", text: $titleText)
-                .modifier(TextFieldModifier())
+                .modifier(TextModifier())
             Button {
                 if titleText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty { return }
                 addText(titleText)
@@ -62,49 +125,33 @@ private struct AddOptionView: View {
     }
 }
 
-private struct OptionListView: View {
-    @Binding var options: [String]
+private struct EditOptionView: View {
+    enum EditingState {
+        case edit
+        case delete
+    }
+    
+    @State var titleText: String
+    var action: (EditingState) -> Void
+
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Existing Option:")
-                .padding(.vertical)
-            ForEach (options, id: \.self) { option in
-                HStack {
-                    Text(option)
-                    Spacer()
-                    Button {}
-                    label: {
-                        Image(systemName: "pencil")
-                    }
-                    Button {
-                        if let index = options.firstIndex(of: option) {
-                            options.remove(at: index)
-                        }
-                    } label: {
-                        Image(systemName: "x.circle")
-                    }
-                }
-                .padding(8)
-                .background(Color.gray.opacity(0.05).cornerRadius(8))
-            }
+        Text(titleText)
+        Spacer()
+        Button {
+            action(.edit)
+        }
+        label: {
+            Image(systemName: "pencil")
+        }
+        Button {
+            action(.delete)
+        } label: {
+            Image(systemName: "x.circle")
         }
     }
 }
 
-struct HeaderView: View {
-    @Binding var title: String
-    @Binding var description: String
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("Title")
-            TextField("Enter poll title", text: $title)
-                .modifier(TextFieldModifier())
-            Text("Description")
-            TextField("Enter poll description", text: $description)
-                .modifier(TextFieldModifier())
-        }
-    }
-}
+// MARK: Preview
 
 #Preview {
     NavigationStack {
