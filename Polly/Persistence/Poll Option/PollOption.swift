@@ -66,4 +66,3 @@ extension PollOption {
 extension PollOption: Identifiable {
 
 }
-
