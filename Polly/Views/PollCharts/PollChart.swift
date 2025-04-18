@@ -8,7 +8,7 @@
 import SwiftUI
 import Charts
 
-struct PollChartView: View {
+struct PollChart: View {
     let chartType: PollTypes
     
     var data = SampleData.createSampleData()
@@ -24,9 +24,10 @@ struct PollChartView: View {
                         
                         switch chartType {
                         case .pieChart:
-                            PollPieChartView(poll: poll)
-                        case .barGraph:
-                            PollBarChartView(poll: poll)
+                            PieChart(poll: poll)
+                        case .barGraph(let graphType):
+                            BarChart(poll: poll,
+                                     pollType: graphType)
                         }
                         
                         Divider()
@@ -40,7 +41,9 @@ struct PollChartView: View {
 }
 
 #Preview {
-    PollChartView(chartType: .barGraph)
+    PollChart(chartType: .barGraph(type: .horizontal))
     
-    PollChartView(chartType: .pieChart)
+    PollChart(chartType: .barGraph(type: .vertical))
+    
+    PollChart(chartType: .pieChart)
 }

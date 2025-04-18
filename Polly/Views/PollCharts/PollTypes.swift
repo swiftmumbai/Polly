@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum BarGraphType {
+    case horizontal
+    case vertical
+}
+
 enum PollTypes {
-    case pieChart, barGraph
+    case pieChart
+    case barGraph(type: BarGraphType)
 }

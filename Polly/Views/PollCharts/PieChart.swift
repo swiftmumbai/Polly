@@ -1,5 +1,5 @@
 //
-//  PollPieChartView.swift
+//  PieChart.swift
 //  Polly
 //
 //  Created by Midhet Sulemani on 16/04/25.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Charts
 
-struct PollPieChartView: View {
+struct PieChart: View {
     let poll: Poll
     
     var body: some View {
@@ -30,5 +30,5 @@ struct PollPieChartView: View {
 }
 
 #Preview {
-    PollPieChartView(poll: SampleData.previewPoll)
+    PieChart(poll: SampleData.previewPoll)
 }
