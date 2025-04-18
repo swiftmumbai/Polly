@@ -9,30 +9,9 @@ import SwiftUI
 import Charts
 
 struct PollPieChartView: View {
-    var data = SampleData.createSampleData()
+    let poll: Poll
     
     var body: some View {
-        ScrollView {
-            VStack {
-                ForEach(data.polls) { poll in
-                    VStack {
-                        Text(poll.title ?? String())
-                            .font(.title)
-                            .multilineTextAlignment(.center)
-                        
-                        chart(poll: poll)
-                        
-                        Divider()
-                            .padding()
-                    }
-                }
-            }
-        }
-        .padding()
-    }
-        
-    @ViewBuilder
-    private func chart(poll: Poll) -> some View {
         let pollOptions: [PollOption] = poll.options?.toArray() ?? []
         
         Chart(pollOptions) { option in
@@ -41,13 +20,15 @@ struct PollPieChartView: View {
             
             SectorMark(angle: .value(optionTitle, votes.count))
                 .foregroundStyle(by: .value(optionTitle, optionTitle))
-                .accessibilityLabel("Poll Bar chart")
+                .accessibilityLabel("Poll Pie chart")
         }
         .chartLegend(.visible)
         .frame(height: 200)
     }
+        
+    
 }
 
 #Preview {
-    PollPieChartView()
+    PollPieChartView(poll: SampleData.previewPoll)
 }
