@@ -24,6 +24,7 @@ struct PieChart: View {
         }
         .chartLegend(.visible)
         .frame(height: 200)
+        .animation(.easeInOut, value: pollOptions)
     }
         
     

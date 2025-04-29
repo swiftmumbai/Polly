@@ -13,41 +13,12 @@ struct BarChart: View {
     let pollType: BarGraphType
     
     var body: some View {
-        let pollOptions: [PollOption] = poll.options?.toArray() ?? []
-        
-        Chart(pollOptions) { option in
-            let votes: [Vote] = option.votes?.toArray() ?? []
-            let optionTitle = option.text ?? String()
-            
-            Plot {
-                switch pollType {
-                case .horizontal:
-                    BarMark(
-                        x: .value("Participants", votes.count),
-                        y: .value("Choices", optionTitle),
-                        width: .fixed(100),
-                        height: .fixed(20)
-                    )
-                    .foregroundStyle(by: .value("Choices", optionTitle))
-                case .vertical:
-                    BarMark(
-                        x: .value("Choices", optionTitle),
-                        y: .value("Participants", votes.count),
-                        width: .fixed(100),
-                        height: .fixed(20)
-                    )
-                    .foregroundStyle(by: .value("Participants",
-                                                votes.count))
-                }
-            }
-            .accessibilityLabel("Poll Bar chart")
-            .position(by: .value("Choices", optionTitle))
+        switch pollType {
+        case .horizontal:
+            HorizontalBarChart(poll: poll)
+        case .vertical:
+            VerticalBarChart(poll: poll)
         }
-        .chartLegend(.visible)
-        .chartLegend(position: .top)
-        .chartYAxis(.hidden)
-        .chartXAxis(.visible)
-        .frame(height: 200)
     }
 }
 
