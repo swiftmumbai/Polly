@@ -12,7 +12,22 @@ enum BarGraphType {
     case vertical
 }
 
-enum PollTypes {
+enum PollTypes: CaseIterable, Hashable {
     case pieChart
     case barGraph(type: BarGraphType)
+    
+    static var allCases: [PollTypes] {
+        [.pieChart, .barGraph(type: .horizontal), .barGraph(type: .vertical)]
+    }
+    
+    var title: String {
+        switch self {
+        case .pieChart:
+            return "Pie Chart"
+        case .barGraph(type: .horizontal):
+            return "Horizontal Bar Graph"
+        case .barGraph(type: .vertical):
+            return "Vertical Bar Graph"
+        }
+    }
 }
