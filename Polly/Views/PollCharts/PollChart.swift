@@ -18,7 +18,7 @@ struct PollChart: View {
             VStack {
                 ForEach(data.polls) { poll in
                     VStack {
-                        Text(poll.title ?? String())
+                        Text(poll.displayTitle)
                             .font(.title)
                             .multilineTextAlignment(.center)
                         

@@ -13,7 +13,7 @@ struct PollListView: View {
     var body: some View {
         List(viewModel.polls) {poll in
             VStack(alignment: .leading, spacing: 10) {
-                Text(poll.title ?? String())
+                Text(poll.title)
                     .bold()
                     .font(.headline)
                 
