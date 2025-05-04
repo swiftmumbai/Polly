@@ -17,4 +17,7 @@ extension Optional where Wrapped == NSOrderedSet {
     func toArray<T>() -> [T] {
         return self?.array as? [T] ?? []
     }
-} 
+}
+
+// Just a test
+
