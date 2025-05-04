@@ -19,5 +19,3 @@ extension Optional where Wrapped == NSOrderedSet {
     }
 }
 
-// Just a test
-// Hello World
