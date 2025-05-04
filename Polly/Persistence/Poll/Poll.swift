@@ -69,3 +69,9 @@ extension Poll {
 extension Poll: Identifiable {
 
 }
+
+extension Poll {
+    var displayTitle: String {
+        title ?? "Untitled Poll"
+    }
+}
